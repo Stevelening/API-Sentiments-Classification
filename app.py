@@ -59,4 +59,4 @@ if __name__ == '__main__':
     print ('Model loaded')
     cv = joblib.load("mycv.pkl") # Load my "cv"
     print ('cv loaded')
-    application.run(port=port, debug=True)
+    app.run(port=port, debug=True)
