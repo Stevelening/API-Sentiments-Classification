@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3 style="margin: 30px 10px;">TP MACHINE LEARNING SUR LES METHODES DE CLASSIFICATION <br><br>NOM : LENING TALAUPA ZIDANE STEVE <br><br>CLASSE : 4GI <br><br>MATRICULE : 19P019</h3>
+    <p style="margin: 20px 10px;">La methode utilisee est la methode <i><b>Multinomial Naive Bayes (MNB)</b></i></p>
+    <p style="margin: 0px 10px;">Veillez entrer un commentaire</p>
+    <input type="text" style="margin: 10px 10px;width: 1000px;height: 30px;" id="input"><br>
+    <input type="submit" style="margin: 10px 10px;padding: 5px 5px;" onclick="predict()" value="Soumettre"><br>
+    <label for="" id="1" style="margin: 10px 10px;"><u>Resultat de la prediction :</u>   </label>
+    <label for="" id="2" style="margin: 10px 10px;">.</label>
+
+    <script>
+        function predict(){
+            // on recupere le contenu de notre input 
+            let text = document.getElementById('input').value;
+            //text = cleaning(text);
+            //console.log(text)
+            text = text.replaceAll(' ', '%20')
+
+            // on effectu la requette vers le serveur
+            const Http = new XMLHttpRequest();
+            var url = 'http://127.0.0.1:12345/prediction?text='
+            url = url+text;
+
+            Http.open('GET', url);
+            Http.send();
+
+            Http.onreadystatechange = ()=>{
+                console.log(Http.responseText);
+                // on met a jour le contenu de label 2
+                document.getElementById('2').innerHTML = 'Cet enonce exprime un sentiment " '+(JSON.parse(Http.responseText)).sentiment+' " avec un poucentage de surete de " '+(JSON.parse(Http.responseText)).pourcentage+' "';
+            }
+
+        }
+
+        function cleaning(text){
+            // on convertit tout en minuscule, on retire les adresses URL, les caracteres speciaux, les ponctuations, etc.
+            text = text.toLowerCase() // conversion en minuscule
+            text = text.replaceAll('https?://\S+|www\.\S+', '') //suppression des URL
+            text = text.replaceAll("\b\d+\b", '') //suppression des nombres
+            text = text.replaceAll('/<.*?>+/', '') //suppression des caracteres speciaux 
+            //text = text.replaceAll('[%s]' % re.escape(string.punctuation), '') //suppression des ponctuations
+            text = text.replaceAll('\n', '')
+            text = text.replaceAll('[’“”…]', '')
+        
+            // suppression des emojis:
+            text=text.replaceAll("\U0001F600-\U0001F64F",'')
+            text=text.replaceAll("\U0001F300-\U0001F5FF",'')
+            text=text.replaceAll("\U0001F680-\U0001F6FF",'')
+            text=text.replaceAll("\U0001F1E0-\U0001F1FF",'')
+            text=text.replaceAll("\U00002702-\U000027B0",'')
+            text=text.replaceAll("\U000024C2-\U0001F251",'')   
+
+            //suppression des abreviations: 
+            
+            text=text.replaceAll("isn't",'is not')
+            text=text.replaceAll("he's",'he is')
+            text=text.replaceAll("wasn't",'was not')
+            text=text.replaceAll("there's",'there is')
+            text=text.replaceAll("couldn't",'could not')
+            text=text.replaceAll("won't",'will not')
+            text=text.replaceAll("they're",'they are')
+            text=text.replaceAll("she's",'she is')
+            text=text.replaceAll("There's",'there is')
+            text=text.replaceAll("wouldn't",'would not')
+            text=text.replaceAll("haven't",'have not')
+            text=text.replaceAll("That's",'That is')
+            text=text.replaceAll("you've",'you have')
+            text=text.replaceAll("He's",'He is')
+            text=text.replaceAll("what's",'what is')
+            text=text.replaceAll("weren't",'were not')
+            text=text.replaceAll("we're",'we are')
+            text=text.replaceAll("hasn't",'has not')
+            text=text.replaceAll("you'd",'you would')
+            text=text.replaceAll("shouldn't",'should not')
+            text=text.replaceAll("let's",'let us')
+            text=text.replaceAll("they've",'they have')
+            text=text.replaceAll("You'll",'You will')
+            text=text.replaceAll("i'm",'i am')
+            text=text.replaceAll("we've",'we have')
+            text=text.replaceAll("it's",'it is')
+            text=text.replaceAll("don't",'do not')
+            text=text.replaceAll("that´s",'that is')
+            text=text.replaceAll("I´m",'I am')
+            text=text.replaceAll("it’s",'it is')
+            text=text.replaceAll("she´s",'she is')
+            text=text.replaceAll("he’s'",'he is')
+            text=text.replaceAll('I’m','I am')
+            text=text.replaceAll('I’d','I did')
+            text=text.replaceAll("he’s'",'he is')
+            text=text.replaceAll('there’s','there is')
+            
+            return text
+        }
+    </script>
+
+</body>
+</html>
