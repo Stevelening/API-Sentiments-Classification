@@ -11,10 +11,10 @@ from nltk.tokenize import RegexpTokenizer
 
 import re
 
-application = Flask(__name__)
-CORS(application)
+app = Flask(__name__)
+CORS(app)
 
-@application.route('/prediction', methods=['GET'])
+@app.route('/prediction', methods=['GET'])
 #define function
 
 def predict():
