@@ -1,6 +1,8 @@
 # API-Sentiments-Classification
 Il s'agit d'une api de classification de sentiments basée sur le modèle de `Bayes Naif Multinominal`.
 
+![Appercu de l'application](./images/sentiments.png "Appercu de l'application")
+
 # Comment tester/utiliser l'api
 
  Pour tester/utiliser notre api, il suffit de suivre les etapes suivantes :
